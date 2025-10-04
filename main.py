@@ -10,10 +10,11 @@ screen.setup(width=800, height=600)
 screen.title("Pong")
 screen.tracer(0)
 
-p1 = Paddle((350, 0))           #Right paddle
-p2 = Paddle((-350, 0))          #Left paddle
-ball = Ball()
-score = Scoreboard()
+# --- Game Objects ---
+p1 = Paddle((350, 0))           # Right paddle
+p2 = Paddle((-350, 0))          # Left paddle
+ball = Ball()                    # Ball object
+score = Scoreboard()             # Scoreboard
 
 screen.listen() #listen to keystrokes
 screen.onkey(p1.up, "Up")
@@ -22,16 +23,14 @@ screen.onkey(p2.up, "w")
 screen.onkey(p2.down, "s")
 
 def side_collision():
+    """Bounce ball off top and bottom walls."""
     x= ball.xcor()
     y= ball.ycor()
     if y > 280 or y < -280:
         ball.bounce_y()
 
 def paddle_collision():
-    # if ball.distance(p1) < 33 and ball.xcor() > 335 or ball.distance(p2) < 33 and ball.xcor() < -335:
-    #     print("Paddle Collision")
-    #     ball.bounce_x()
-
+    """Bounce ball off paddles if it hits within paddle boundaries."""
     # Right paddle collision
     if (p1.xcor() - 10 < ball.xcor() + 10 < p1.xcor() + 10) and (p1.ycor() - 50 < ball.ycor() < p1.ycor() + 50):
         ball.bounce_x()
@@ -46,6 +45,10 @@ def paddle_collision():
         ball.bounce_x()
 
 def wall_collision():
+    """
+    Detect if the ball passes beyond left or right paddle (scoring condition).
+    Resets ball to center and updates player score.
+    """
     #Right wall collision
     if ball.xcor() > p1.xcor() + 20:
         ball.goto(0,0)
@@ -60,15 +63,12 @@ def wall_collision():
 
 game_is_on = True
 while game_is_on:
-    time.sleep(ball.move_speed)
-    screen.update()
+    time.sleep(ball.move_speed)  # control speed of the ball
+    screen.update()  # refresh screen manually
 
-    ball.move()
-    side_collision()
-    paddle_collision()
-    wall_collision()
-
-
-
+    ball.move()  # move the ball
+    side_collision()  # check for top/bottom wall collision
+    paddle_collision()  # check for paddle collision
+    wall_collision()  # check for scoring
 
 screen.exitonclick()
