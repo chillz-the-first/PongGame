@@ -1,6 +1,7 @@
 from turtle import Screen, Turtle
 from paddles import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -12,6 +13,7 @@ screen.tracer(0)
 p1 = Paddle((350, 0))           #Right paddle
 p2 = Paddle((-350, 0))          #Left paddle
 ball = Ball()
+score = Scoreboard()
 
 screen.listen() #listen to keystrokes
 screen.onkey(p1.up, "Up")
@@ -46,10 +48,12 @@ def wall_collision():
     #Right wall collision
     if ball.xcor() > p1.xcor() + 20:
         ball.goto(0,0)
+        score.increase_score(2)
         ball.reset_ball()
     #Left wall collision
     elif ball.xcor() < p2.xcor() - 20:
         ball.goto(0,0)
+        score.increase_score(1)
         ball.reset_ball()
 
 
