@@ -9,8 +9,8 @@ screen.setup(width=800, height=600)
 screen.title("Pong")
 screen.tracer(0)
 
-p1 = Paddle((350, 0))
-p2 = Paddle((-350, 0))
+p1 = Paddle((350, 0))           #Right paddle
+p2 = Paddle((-350, 0))          #Left paddle
 ball = Ball()
 
 screen.listen() #listen to keystrokes
@@ -23,15 +23,34 @@ def wall_collision():
     x= ball.xcor()
     y= ball.ycor()
     if y > 280 or y < -280:
-        ball.bounce()
+        ball.bounce_y()
+
+def paddle_collision():
+    # if ball.distance(p1) < 33 and ball.xcor() > 335 or ball.distance(p2) < 33 and ball.xcor() < -335:
+    #     print("Paddle Collision")
+    #     ball.bounce_x()
+
+    # Right paddle collision
+    if (p1.xcor() - 10 < ball.xcor() + 10 < p1.xcor() + 10) and (p1.ycor() - 50 < ball.ycor() < p1.ycor() + 50):
+        ball.bounce_x()
+
+    #p1.xcor() - 10 → left edge of right paddle
+    #p1.xcor() + 10 → right edge of right paddle
+    #ball.xcor() + 10 → right edge of ball (radius = 10); Similarly for y coordinates
+
+    # Left paddle collision
+    if (p2.xcor() - 10 < ball.xcor() - 10 < p2.xcor() + 10) and (p2.ycor() - 50 < ball.ycor() < p2.ycor() + 50):
+        ball.bounce_x()
 
 
 game_is_on = True
 while game_is_on:
     time.sleep(0.06)
     screen.update()
+
     ball.move()
     wall_collision()
+    paddle_collision()
 
 
 
