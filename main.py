@@ -19,7 +19,7 @@ screen.onkey(p1.down, "Down")
 screen.onkey(p2.up, "w")
 screen.onkey(p2.down, "s")
 
-def wall_collision():
+def side_collision():
     x= ball.xcor()
     y= ball.ycor()
     if y > 280 or y < -280:
@@ -42,6 +42,16 @@ def paddle_collision():
     if (p2.xcor() - 10 < ball.xcor() - 10 < p2.xcor() + 10) and (p2.ycor() - 50 < ball.ycor() < p2.ycor() + 50):
         ball.bounce_x()
 
+def wall_collision():
+    #Right wall collision
+    if ball.xcor() > p1.xcor() + 20:
+        ball.goto(0,0)
+        ball.reset_ball()
+    #Left wall collision
+    elif ball.xcor() < p2.xcor() - 20:
+        ball.goto(0,0)
+        ball.reset_ball()
+
 
 game_is_on = True
 while game_is_on:
@@ -49,8 +59,9 @@ while game_is_on:
     screen.update()
 
     ball.move()
-    wall_collision()
+    side_collision()
     paddle_collision()
+    wall_collision()
 
 
 
