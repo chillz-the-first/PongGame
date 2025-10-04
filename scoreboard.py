@@ -7,14 +7,13 @@ class Scoreboard(Turtle):
         self.color("white")
         self.score_p1 = 0
         self.score_p2 = 0
-        self.goto(0, 280)
-        # self.pendown()
+        self.goto(0, 265)
         self.hideturtle()
         self.display_score()
 
     def display_score(self):
         self.clear()
-        self.write(f"{self.score_p2} : {self.score_p1}", align="center", font=("Courier", 16, "normal"))
+        self.write(f"{self.score_p2} : {self.score_p1}", align="center", font=("Courier", 30, "normal"))
 
     def increase_score(self, p):
         if p == 1:

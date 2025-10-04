@@ -36,6 +36,7 @@ def paddle_collision():
     if (p1.xcor() - 10 < ball.xcor() + 10 < p1.xcor() + 10) and (p1.ycor() - 50 < ball.ycor() < p1.ycor() + 50):
         ball.bounce_x()
 
+
     #p1.xcor() - 10 → left edge of right paddle
     #p1.xcor() + 10 → right edge of right paddle
     #ball.xcor() + 10 → right edge of ball (radius = 10); Similarly for y coordinates
@@ -59,7 +60,7 @@ def wall_collision():
 
 game_is_on = True
 while game_is_on:
-    time.sleep(0.06)
+    time.sleep(ball.move_speed)
     screen.update()
 
     ball.move()
