@@ -8,8 +8,8 @@ screen.setup(width=800, height=600)
 screen.title("Pong")
 screen.tracer(0)
 
-p1 = Paddle("right")
-p2 = Paddle("left")
+p1 = Paddle((350, 0))
+p2 = Paddle((-350, 0))
 
 screen.listen() #listen to keystrokes
 screen.onkey(p1.up, "Up")

@@ -6,30 +6,19 @@ class Paddle(Turtle):
         super().__init__()
         self.shape("square")
         self.penup()
-        # self.color("white")
+        self.color("white")
         self.shapesize(stretch_wid=5 ,stretch_len=1)
-        self.position = position
-        if position == "right":
-            self.goto(350, 0)
-            self.color("red")
-        else:
-            self.goto(-350, 0)
-            self.color("blue")
+        self.goto(position[0], position[1])
+        self.goto(position[0], position[1])
 
     def up(self):
         new_y = self.ycor() + MOVE_DISTANCE
         if self.ycor() < 250:
-            if self.position == "right":
-                self.goto(350, new_y)
-            else:
-                self.goto(-350, new_y)
+            self.goto(self.xcor(), new_y)
 
     def down(self):
         new_y = self.ycor() - MOVE_DISTANCE
         if self.ycor() > -250:
-            if self.position == "right":
-                self.goto(350, new_y)
-            else:
-                self.goto(-350, new_y)
+            self.goto(self.xcor(), new_y)
 
 
