@@ -19,12 +19,19 @@ screen.onkey(p1.down, "Down")
 screen.onkey(p2.up, "w")
 screen.onkey(p2.down, "s")
 
+def wall_collision():
+    x= ball.xcor()
+    y= ball.ycor()
+    if y > 280 or y < -280:
+        ball.bounce()
+
+
 game_is_on = True
 while game_is_on:
     time.sleep(0.06)
     screen.update()
     ball.move()
-
+    wall_collision()
 
 
 
